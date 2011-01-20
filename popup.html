@@ -8,24 +8,59 @@ body { width: 300px; }
       chrome.tabs.getSelected(null, function(tab) {        
 	document.forms[0].elements[1].value =tab.url;//get current url from chrome and put it in item[url]
       });
+
+	function postForm()
+	{
+		document.getElementById('progress').innerHTML='<img src=\"img/progress.gif\"> Processing'; //display the progress animation
+
+    	var http = new XMLHttpRequest();
+		
+		//get form values
+	    var itemQty=encodeURIComponent(document.forms[0].elements[0].value);
+	    var itemUrl=encodeURIComponent(document.forms[0].elements[1].value);
+	    var token=encodeURIComponent(document.forms[0].elements[2].value);
+	    var itemComment=encodeURIComponent(document.forms[0].elements[3].value);
+
+	    var params = 'item[quantity]='+itemQty+'&item[url]='+itemUrl+'&authenticity_token='+token+'&item[comment][content]='+itemComment;
+	
+	    http.open("POST", "http://harilo.com/cart_items", true);
+
+	    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    http.setRequestHeader("Content-length", params.length);
+	    http.setRequestHeader("Connection", "close");
+
+	    http.onreadystatechange = function() {
+		if (http.readyState == 4 && http.status == 200) 
+		{
+		    window.location ='done.html';		    
+		}
+	    }
+	    http.send(params);
+	}
+
+
 </script>
 </head>
 <body>
+
 <b>Add this to harilo:</b><br/>
 
 <form action="http://harilo.com/cart_items" method="post" name="hariloForm">
 	<label for="item_quantity">How Many</label> 
 	<input id="item_quantity" name="item[quantity]" size="2" type="text" value="1" />
 	<input id="item_url" name="item[url]" size="30" type="hidden" value="" />
-	<input name="authenticity_token" type="hidden" value="avEiJ09nC/IrmVD4mgF6vGFPab9xwKs0PtuObkIy5Vk=" />
+	<input name="authenticity_token" type="hidden" value="MygKp116pJn2Bo7xidq4P8d/LFpwTI9BErajHLh60CU=" />
 
 	<p> 
 		<label for="item_comment_content">Note (optional) Tip: Enter any special instructions for your item here</label><br/> 
 		<textarea cols="35" id="item_comment_content" name="item[comment][content]" rows="5"></textarea>
 	</p>
-
-	<input class="button" name="commit" type="submit" value="Add to cart" onClick='updatePopup()' />
-</form>
+	
+	<a href="#" onClick='postForm()'><img src="img/button.png"/></a>
+	<p>
+		<div id="progress"></div>
+	</p>
+</div>
 
 </body>
 </html>
