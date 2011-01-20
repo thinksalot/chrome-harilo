@@ -1,0 +1,26 @@
+<html>
+<head>
+<script>
+	function getShopPage()
+	{
+		var tokenPage=new XMLHttpRequest();
+		tokenPage.open("GET","http://www.harilo.com/shop",true);
+		tokenPage.onreadystatechange=function(){
+			if (tokenPage.readyState==4 && tokenPage.status==200)
+			{				
+				document.getElementById("frameContent").innerHTML=tokenPage.responseText;
+				var page=tokenPage.responseText;
+				//alert(tokenPage.responseText);
+				//alert('loaded');
+			}
+		}
+	      tokenPage.send(null);
+	}
+</script>
+
+</head>
+
+<body onLoad="setTimeout('getShopPage()', 50)">>
+<div id="frameContent"></div>
+</body>
+</html>
