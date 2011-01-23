@@ -10,9 +10,9 @@
 		tokenPage.onreadystatechange=function(){
 			if (tokenPage.readyState==4 && tokenPage.status==200)
 			{
-				document.getElementById("frameContent").innerHTML=tokenPage.responseText;
-  			parent.document.getElementById('progress').innerHTML='<img src=\"img/face-grin.png\"> You may submit now.'; //clear the loading animation
-				var page=tokenPage.responseText;
+        document.getElementById("frameContent").innerHTML=tokenPage.responseText;
+        parent.document.getElementById('progress').innerHTML='<img src=\"img/face-grin.png\"> You may submit now.'; //clear the loading animation
+        var page=tokenPage.responseText;
 			}
 		}
 	  tokenPage.send(null);
