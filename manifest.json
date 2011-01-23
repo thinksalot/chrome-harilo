@@ -1,8 +1,8 @@
 {
 "name": "Harilo.com Chrome Extension",
-"version": "0.2",
+"version": "0.3",
 "description": "Products from the United States to Nepal.",
-"permissions":["http://*/*", "https://*/*","tabs"],
+"permissions":["http://*/*", "https://*/*","tabs","notifications"],
 "icons": {
     "16": "img/icon16.png",
     "48": "img/icon48.png",
@@ -12,5 +12,6 @@
 "default_title": "Send to Harilo.com",
 "default_icon": "img/icon16.png",
 "popup": "popup.html"
-} 
 }
+}
+

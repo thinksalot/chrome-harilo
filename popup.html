@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -9,40 +10,52 @@ body { width: 300px; }
 	document.forms[0].elements[1].value =tab.url;//get current url from chrome and put it in item[url]
       });
 
-    	function postForm()
+  function openPage(url)
+  {
+    var http = new XMLHttpRequest();
+		http.open("GET", url, true);
+		http.send();
+  }
+
+  function postForm()
 	{
-		document.getElementById('progress').innerHTML='<img src=\"img/progress.gif\"> Processing'; //display the progress animation
-		//document.getElementById('iframeContainer').innerHTML='<iframe id=\"shopFrame\" name=\"shopFrame\" src=\"frame.html\" width=\"150\" height=\"150\" style=\"border:0px\"></iframe>';
+		document.getElementById('progress').innerHTML='<img src=\"img/progress.gif\"> Processing...'; //display the progress animation
 		var token=getToken();
-		alert(token);
+		console.log('Token:'+token);
 
 		var http = new XMLHttpRequest();
-		//get form values
+
+		//get form values and encode them
 		var itemQty=encodeURIComponent(document.forms[0].elements[0].value);
 		var itemUrl=encodeURIComponent(document.forms[0].elements[1].value);
-		//var token=encodeURIComponent(document.forms[0].elements[2].value);
+		var token=encodeURIComponent(token);
 		var itemComment=encodeURIComponent(document.forms[0].elements[3].value);
 
 		var params = 'item[quantity]='+itemQty+'&item[url]='+itemUrl+'&authenticity_token='+token+'&item[comment][content]='+itemComment;
 
 		http.open("POST", "http://www.harilo.com/cart_items", true);
-
 		http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		http.setRequestHeader("Content-length", params.length);
-		http.setRequestHeader("Connection", "close");
 
 		http.onreadystatechange = function() {
-			if (http.readyState == 4 && http.status == 200)
+			if (http.readyState == 4)
 			{
-				window.location ='done.html';
+			  if(http.status == 200)
+			  {
+			    //console.log('Added to cart !'); //log value for debugging
+				  window.location ='done.html';
+				}
+				else
+				{
+				  document.getElementById('progress').innerHTML='<span style=\"color:red\">Ahh crap! Something bad happened. Please retry !</span>';
+				}
 			}
 		}
 		http.send(params);
+		//console.log('Parameter:'+params); //log value for debugging
 	}
 
 	function getToken()
 	{
-		//alert(document.getElementById("shopFrame").document.forms(0).elements(0).value);
 		var shopFrame = document.getElementById("shopFrame");
 		var shopDocument = shopFrame.contentDocument || shopFrame.contentWindow.document;
 		var token = shopDocument.forms(0).elements(0).value;
@@ -54,30 +67,31 @@ body { width: 300px; }
 </head>
 <body>
 
-
-
 <b>Add this to harilo:</b><br/>
 
-<form action="http://harilo.com/cart_items" method="post" name="hariloForm">
-	<label for="item_quantity">How Many</label>
-	<input id="item_quantity" name="item[quantity]" size="2" type="text" value="1" />
-	<input id="item_url" name="item[url]" size="30" type="hidden" value="" />
-	<input name="authenticity_token" type="hidden" value="" />
+  <form action="http://harilo.com/cart_items" method="post" name="hariloForm">
 
-	<p>
-		<label for="item_comment_content">Note (optional) Tip: Enter any special instructions for your item here</label><br/>
-		<textarea cols="35" id="item_comment_content" name="item[comment][content]" rows="5"></textarea>
-	</p>
+	  <label for="item_quantity">How Many</label>
+	  <input id="item_quantity" name="item[quantity]" size="2" type="text" value="1" />
+	  <input id="item_url" name="item[url]" size="30" type="hidden" value="" />
+	  <input name="authenticity_token" type="hidden" value="" />
 
-	<a href="#" onClick='postForm()'><img src="img/button.png"/></a>
-	<p>
-		<div id="progress"></div>
-	</p>
-</form>
-</div>
+	  <p>
+		  <label for="item_comment_content">Note (optional) Tip: Enter any special instructions for your item here</label><br/>
+		  <textarea cols="35" id="item_comment_content" name="item[comment][content]" rows="5"></textarea>
+	  </p>
+    <div id="addButton">
+	    <a href="#" name="button" onClick='postForm()'><img src="img/button.png"/></a>
+	  </div>
+	  <p>
+		  <div id="progress"></div>
+	  </p>
+  </form>
+
 <div id="iframeContainer">
-<iframe id="shopFrame" name="shopFrame" src="frame.html" width="0" height="0" style="border:2px"></iframe>
+  <iframe id="shopFrame" name="shopFrame" src="frame.html" width="0" height="0" style="border:0px"></iframe>
 </div>
+
 </body>
 </html>
 
