@@ -1,11 +1,14 @@
 /*
-By: Aalok Thapa <thapa{dot}aalok{at}gmail{dot}com>
-Last modified: January 24, 2011
-*/
+ * Chrome Extension for Harilo.com
+ * 
+ * @author		Aalok Thapa <thapa.aalok@gmail.com>
+ * @modified	May 19, 2012
+ * 
+ */
 
 function postForm(callback)
 {
-  document.getElementById('progress').innerHTML=' <img  src=\"img/progress.gif\">'; //display the progress animation
+  document.getElementById('progress').innerHTML=' <img class=\"spinner\"  src=\"img/progress.gif\">'; //display the progress animation
   var token=getToken();
   //console.log('Token:'+token);
 
@@ -74,7 +77,7 @@ function getToken()
 
 function getShopPage()
 {
-  parent.document.getElementById('progress').innerHTML='<img src=\"img/progress.gif\">'; //display the loading animation
+  parent.document.getElementById('progress').innerHTML='<img class=\"spinner\" src=\"img/progress.gif\">'; //display the loading animation
   var tokenPage=new XMLHttpRequest();
   tokenPage.open("GET","http://www.harilo.com/shop",true);
   tokenPage.onreadystatechange=function(){
