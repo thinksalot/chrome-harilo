@@ -1,4 +1,4 @@
-Chrome extension for [harilo.com](www.harilo.com)
+Chrome extension for [harilo.com](http://www.harilo.com)
 
 Download from [chrome store](https://chrome.google.com/extensions/detail/idbjeafhcpemddafdlacadljfmbepmdi) 
 
