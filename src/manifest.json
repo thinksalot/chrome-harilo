@@ -1,17 +1,19 @@
 {
-"name": "Harilo.com Chrome Extension",
-"version": "0.5",
-"description": "Products from the United States to Nepal.",
-"permissions":["http://*/*", "https://*/*","tabs","notifications"],
-"icons": {
-    "16": "img/icon16.png",
-    "48": "img/icon48.png",
-    "128": "img/icon128.png"
-  },
-"browser_action": {
-"default_title": "Send to Harilo.com",
-"default_icon": "img/icon16.png",
-"popup": "popup.html"
-}
+	"name": "Harilo.com Chrome Extension",
+	"version": "0.5",
+	"description": "Products from the United States to Nepal.",
+	"permissions":["http://www.harilo.com/shop","tabs","notifications"],
+	"icons": {
+		"16": "img/icon16.png",
+		"48": "img/icon48.png",
+		"128": "img/icon128.png"
+	},
+	"browser_action": {
+		"default_title": "Send to Harilo.com",
+		"default_icon": "img/icon16.png",
+		"default_popup": "popup.html"
+	},
+	"manifest_version":2,
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
 

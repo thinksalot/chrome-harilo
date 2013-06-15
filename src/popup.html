@@ -1,50 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body { 
-	width: 300px;
-}
+	<head>
+		<style>
+			body { 
+				width: 300px;
+			}
 
-.spinner {
-	position: absolute;
-	margin: 7px;
-}
+			.spinner {
+				position: absolute;
+				margin: 7px;
+			}
 
-</style>
-<script src="script/script.js"></script>
-<script>
-      chrome.tabs.getSelected(null, function(tab) {
-	document.forms[0].elements[1].value =tab.url;//get current url from chrome and put it in item[url]
-      });
-</script>
-</head>
-<body>
+		</style>
+		<script src="script/script.js"></script>
+	</head>
+	<body>
 
-<b>Add this to harilo:</b><br/>
+		<b>Add this to harilo:</b><br/>
 
-<form action="http://harilo.com/cart_items" method="post" name="hariloForm">
+		<form action="http://harilo.com/cart_items" method="post" name="hariloForm">
 
-  <label for="item_quantity">How Many</label>
-  <input id="item_quantity" name="item[quantity]" size="2" type="text" value="1" />
-  <input id="item_url" name="item[url]" size="30" type="hidden" value="" />
-  <input name="authenticity_token" type="hidden" value="" />
+			<label for="item_quantity">How Many</label>
+			<input id="item_quantity" name="item[quantity]" size="2" type="text" value="1" />
+			<input id="item_url" name="item[url]" size="30" type="hidden" value="" />
+			<input name="authenticity_token" type="hidden" value="" />
 
-  <p>
-    <label for="item_comment_content">Note (optional) Tip: Enter any special instructions for your item here</label><br/>
-    <textarea cols="35" id="item_comment_content" name="item[comment][content]" rows="5"></textarea>
-  </p>
-  <div id="addButton">
-    <a href="#" name="button" onClick='addCartButton()'><img src="img/button.png"/></a>
-    <a href="#" name="button" onClick='checkoutButton()'><img src="img/quote.png"/></a>
-    <span id="progress" > </span>
-  </div>
-</form>
+			<p>
+			<label for="item_comment_content">Note (optional) Tip: Enter any special instructions for your item here</label><br/>
+			<textarea cols="35" id="item_comment_content" name="item[comment][content]" rows="5"></textarea>
+			</p>
+			<div id="addButton">
+				<a href="#" name="button" id="addCartButton"><img src="img/button.png"/></a>
+				<a href="#" name="button" id="checkoutButton"><img src="img/quote.png"/></a>
+				<span id="progress" > </span>
+			</div>
+		</form>
 
-<div id="iframeContainer">
-  <iframe id="shopFrame" name="shopFrame" src="frame.html" width="0" height="0" style="border:0px"></iframe>
-</div>
+		<div id="iframeContainer">
+			<iframe id="shopFrame" name="shopFrame" src="frame.html" width="0" height="0" style="border:0px"></iframe>
+		</div>
 
-</body>
+	</body>
 </html>
-
