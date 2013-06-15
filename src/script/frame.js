@@ -1,9 +1,9 @@
 /*
  * Chrome Extension for Harilo.com
  * 
- * @author		Aalok Thapa <thapa.aalok@gmail.com>
- * @modified	June 15, 2013
- * @link		https://github.com/thinksalot/chrome-harilo
+ * @author      Aalok Thapa <thapa.aalok@gmail.com>
+ * @modified    June 15, 2013
+ * @link        https://github.com/thinksalot/chrome-harilo
  * 
  */
 
